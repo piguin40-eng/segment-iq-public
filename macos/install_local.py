@@ -53,6 +53,15 @@ def write_plist(path,value):
     path.chmod(0o600)
 
 
+def build_launcher(app,applications):
+    applications.mkdir(parents=True,exist_ok=True)
+    script='do shell script "/bin/bash " & quoted form of '+json.dumps(str(app/'macos/Start-Mac.sh'))+' & " --browser"'
+    with tempfile.TemporaryDirectory(prefix='segment-iq-launcher-') as temp:
+        target=Path(temp)/'SEGMENT IQ Local.app'
+        run(['/usr/bin/osacompile','-o',target,'-e',script])
+        run(['/usr/bin/ditto',target,applications/'SEGMENT IQ Local.app'])
+
+
 def wait_health(url,seconds=60):
     for _ in range(seconds):
         try:
@@ -165,6 +174,7 @@ def main():
       'mode':'native_mac_own_engine','account_and_models':'pending' if args.ci else 'preparing'}
     (root/'INSTALLATION.json').write_text(json.dumps(installation,indent=2),encoding='utf-8')
     if args.ci:
+        build_launcher(app,root/'launcher-validation')
         print('MAC_NATIVE_DEPENDENCIES_READY (CI: no account/model validation)',flush=True);return
     uid=os.getuid()
     for name in [ollama_label,label]:
@@ -180,12 +190,7 @@ def main():
     print('Inicia sesión en tu propia cuenta de Codex para activar el agente de correcciones.',flush=True)
     if subprocess.run([codex,'login','status'],env=env).returncode:run([codex,'login'],env=env)
     run([codex,'login','status'],env=env)
-    applications=Path.home()/'Applications';applications.mkdir(exist_ok=True)
-    script='do shell script "/bin/bash " & quoted form of '+json.dumps(str(app/'macos/Start-Mac.sh'))+' & " --browser"'
-    with tempfile.TemporaryDirectory(prefix='segment-iq-launcher-') as temp:
-        target=Path(temp)/'SEGMENT IQ Local.app'
-        run(['/usr/bin/osacompile','-o',target,'-e',script])
-        run(['/usr/bin/ditto',target,applications/'SEGMENT IQ Local.app'])
+    build_launcher(app,Path.home()/'Applications')
     installation['account_and_models']='ready'
     (root/'INSTALLATION.json').write_text(json.dumps(installation,indent=2),encoding='utf-8')
     run(['/usr/bin/open','http://127.0.0.1:8765'])
