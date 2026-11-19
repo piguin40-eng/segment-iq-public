@@ -46,8 +46,17 @@ El ZIP público no contiene los casos, vídeos ni corpus privado del laboratorio
 
 La automatización [Mac local Apple Silicon](https://github.com/piguin40-eng/segment-iq-public/actions/workflows/macos-local.yml) instala desde cero en macOS arm64 y verifica dependencias, pruebas de la aplicación, un puente sintético a través de las 13 etapas, servicios locales, RAG semántico, Ollama y Whisper. Consulta el resultado de la ejecución asociada a la versión; una ejecución pendiente o fallida no es una validación.
 
+La versión 0.6.0 tiene [validación nativa completada](MAC_VALIDACION_2026_11_19.md), con retenciones, captura del visor y arranque mediante LaunchAgents.
+
 La prueba automatizada no utiliza una cuenta personal de Codex, B4D licenciado ni casos de pacientes. Tampoco valida la interfaz gráfica, el micrófono o permisos de captura en tu Mac físico. Esos permisos se conceden localmente cuando macOS o el navegador los solicitan. Los resultados geométricos siguen pendientes de revisión del laboratorio; la instalación no convierte un caso en aprobado para fabricar.
 
 ## Cliente remoto anterior
 
 Los DMG `0.6.0-preview.1` de la publicación anterior son clientes que se conectan a otro servidor. No son este instalador local. Para usar todo en el propio Mac, utiliza el ZIP local de arriba. Puedes conservar el cliente anterior para conectarte a un servidor distinto.
+
+## Referencias de los componentes
+
+- [Blender 3.6 y archivos oficiales](https://download.blender.org/release/Blender3.6/).
+- [Instalación oficial de uv](https://docs.astral.sh/uv/getting-started/installation/).
+- [Ollama en macOS](https://docs.ollama.com/macos).
+- [Codex CLI e inicio de sesión](https://learn.chatgpt.com/docs/codex/cli).
