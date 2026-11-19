@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 45
     env:
-      SEGMENT_IQ_INSTALL_ROOT: ${{ github.workspace }}/../Segment IQ native test
+      SEGMENT_IQ_INSTALL_ROOT: ${{ github.workspace }} runtime
     steps:
       - uses: actions/checkout@v4
       - name: Install native dependencies without accounts or patient data
