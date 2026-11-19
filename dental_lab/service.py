@@ -1,4 +1,4 @@
-"""Windowless Windows service entry point, owned by Task Scheduler."""
+"""Local service entry point for Task Scheduler or a per-user macOS LaunchAgent."""
 import argparse,faulthandler,os,sys,traceback,subprocess,time
 from datetime import datetime
 from pathlib import Path

@@ -1,7 +1,8 @@
 import json,os,secrets,tempfile
-from dataclasses import dataclass
+from dataclasses import dataclass,field
 from pathlib import Path
 from .auth import hash_password
+from .platform_paths import install_root,blender_default
 
 @dataclass
 class Settings:
@@ -17,7 +18,7 @@ class Settings:
     vision: bool = True
     frame_seconds: int = 20
     max_frames: int = 720
-    blender: str = r'C:\Program Files\Blender Foundation\Blender 3.6\blender.exe'
+    blender: str = field(default_factory=blender_default)
     geometry_python: str = ''
     b4d_root: str = ''
     live_blender: bool = False
@@ -54,7 +55,7 @@ def set_login(data, username, password):
 
 
 def load():
-    root=Path(os.environ.get('DENTAL_LAB_DATA',str(Path.home()/'Documents/DentalLabAgent/data'))).resolve()
+    root=Path(os.environ.get('DENTAL_LAB_DATA',str(install_root()/'data'))).resolve()
     root.mkdir(parents=True,exist_ok=True);path=root/'config.local.json'
     values=json.loads(path.read_text(encoding='utf-8-sig')) if path.exists() else {'password':secrets.token_urlsafe(24)}
     if 'password_hash' not in values or 'username' not in values:

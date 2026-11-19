@@ -1,0 +1,42 @@
+name: Mac local Apple Silicon
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'macos/**'
+      - 'dental_lab/platform_paths.py'
+      - 'Instalar-SEGMENT-IQ-Mac.command'
+      - '.github/workflows/macos-local.yml'
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      SEGMENT_IQ_INSTALL_ROOT: ${{ github.workspace }}/../Segment IQ native test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native dependencies without accounts or patient data
+        run: bash Instalar-SEGMENT-IQ-Mac.command --ci
+      - name: Test application and geometry libraries on arm64
+        run: |
+          ROOT="$SEGMENT_IQ_INSTALL_ROOT"
+          "$ROOT/runtime/uv/uv" pip install --python "$ROOT/runtime/python/bin/python" -r requirements-geometry.txt
+          "$ROOT/runtime/python/bin/python" -m pytest tests commercial/test_readiness.py -q
+          node --test tests/dictation_ui.test.cjs desktop/test/policy.test.cjs
+      - name: Run actual Blender stages on synthetic bridge
+        run: |
+          "$SEGMENT_IQ_INSTALL_ROOT/runtime/geometry-python/bin/python" macos/smoke_geometry.py \
+            --blender "$SEGMENT_IQ_INSTALL_ROOT/runtime/Blender.app/Contents/MacOS/Blender" \
+            --output "$RUNNER_TEMP/segment-iq-geometry"
+      - name: Preserve non-private diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-arm64-diagnostics
+          path: |
+            ${{ env.SEGMENT_IQ_INSTALL_ROOT }}/data/blender-compatibility.json
+            ${{ env.SEGMENT_IQ_INSTALL_ROOT }}/data/logs/
+            ${{ runner.temp }}/segment-iq-geometry/
+          if-no-files-found: warn

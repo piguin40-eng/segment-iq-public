@@ -1,0 +1,6 @@
+{
+  "uv": {"version":"0.13.9","url":"https://github.com/astral-sh/uv/releases/download/0.13.9/uv-aarch64-apple-darwin.tar.gz","sha256":"5aeca67f2283f75235de40d0bd9c0a5bbc5fce23b6d48b3bf9fa1b2db08382ca"},
+  "blender": {"version":"3.6.23","url":"https://download.blender.org/release/Blender3.6/blender-3.6.23-macos-arm64.dmg","sha256":"ecbeaef4abbeb045de8465e78b3f97aec9b67faf2fc71b20e5eca37bf1caf874"},
+  "codex": {"version":"0.170.0","url":"https://github.com/openai/codex/releases/download/rust-v0.170.0/codex-aarch64-apple-darwin.tar.gz","sha256":"7c9f21d5cbae4860d14b379fdcf709ff399ce874fd714b58783e1b4199c2b9a9"},
+  "ollama": {"version":"0.40.16","url":"https://github.com/ollama/ollama/releases/download/v0.40.16/ollama-darwin.tgz","sha256":"a743717494315da7cd352982b805f6b992d4b4452ca117fd5fbf86c4ee46fca0"}
+}

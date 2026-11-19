@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "segment-iq"
-version = "0.5.25"
+version = "0.6.0"
 description = "Agente local de segmentacion Blender y conocimiento audiovisual del laboratorio"
 requires-python = ">=3.12,<3.13"
 dependencies = ["fastapi", "uvicorn", "python-multipart", "httpx", "faster-whisper", "rapidocr", "onnxruntime", "fastembed", "imageio-ffmpeg", "pillow", "pypdf"]

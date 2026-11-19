@@ -157,7 +157,8 @@ def find_codex(settings):
     found = shutil.which('codex')
     if found:
         return found
-    candidates = list((Path.home()/'AppData/Local/OpenAI/Codex/bin').glob('*/codex.exe'))
+    from .platform_paths import codex_candidates
+    candidates = [p for p in codex_candidates() if p.is_file()]
     return str(max(candidates, key=lambda p: p.stat().st_mtime)) if candidates else None
 
 
