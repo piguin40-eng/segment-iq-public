@@ -15,9 +15,9 @@ def test_mac_paths_are_native_and_windows_paths_preserved(tmp_path):
     root=install_root('darwin',tmp_path)
     assert root==tmp_path/'Library/Application Support/SEGMENT IQ'
     assert environment_python(root,platform='darwin')==root/'runtime/python/bin/python'
-    assert str(blender_default('darwin',tmp_path)).endswith('Blender.app/Contents/MacOS/Blender')
+    assert Path(blender_default('darwin',tmp_path)).parts[-4:]==('Blender.app','Contents','MacOS','Blender')
     assert install_root('win32',tmp_path)==tmp_path/'Documents/DentalLabAgent'
-    assert str(environment_python(tmp_path,platform='win32')).endswith('Scripts/python.exe')
+    assert environment_python(tmp_path,platform='win32').parts[-2:]==('Scripts','python.exe')
     assert any('SEGMENT IQ' in str(p) for p in codex_candidates(platform='darwin',home=tmp_path))
 
 

@@ -16,6 +16,7 @@ import time
 
 from .revisions import compare_profiles, compare_meshes, engine_digest
 from . import lab_workflow
+from .processes import owned_session,stop_owned_process
 
 BACKGROUND = {'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {}
 EDITABLE_CODE = {'shape_refinement.py', 'bar_height.py', 'case_geometry.py', 'occlusal_safety.py'}
@@ -374,7 +375,7 @@ class SegmentHarness:
         env.update(PYTHONUTF8='1',PYTHONIOENCODING='utf-8')
         with log.open('w',encoding='utf-8') as stream:
             process=subprocess.Popen(command,cwd=cwd,env=env,stdin=subprocess.PIPE if prompt else subprocess.DEVNULL,
-                                     stdout=stream,stderr=subprocess.STDOUT,**BACKGROUND)
+                                     stdout=stream,stderr=subprocess.STDOUT,**BACKGROUND,**owned_session())
             try:
                 if prompt:
                     process.stdin.write(prompt.encode('utf-8')); process.stdin.close()
@@ -402,10 +403,7 @@ class SegmentHarness:
                     raise RuntimeError(tool_error_summary(log))
             finally:
                 if process.poll() is None:
-                    if os.name=='nt':
-                        subprocess.run(['taskkill','/PID',str(process.pid),'/T','/F'],capture_output=True,check=False,**BACKGROUND)
-                    else: process.terminate()
-                    process.wait(timeout=30)
+                    stop_owned_process(process)
 
     def think(self, phase, extra, images=()):
         codex=find_codex(self.s)

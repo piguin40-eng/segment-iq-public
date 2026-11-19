@@ -2,15 +2,15 @@
 
 Código completo del agente de segmentación dental del laboratorio: servidor, interfaz, motor Blender, RAG audiovisual, correcciones, skills, pruebas y cliente de escritorio.
 
-**Servidor y motor: 0.5.25 · Cliente: 0.6.0-preview.1 · Copia pública: 19 de noviembre de 2026.**
+**Servidor: 0.6.0 · Instalador local Mac Apple Silicon · Cliente remoto: 0.6.0-preview.1.**
 
 ## Descargar en tu Mac
 
 - [Proyecto completo en ZIP](https://github.com/piguin40-eng/segment-iq-public/archive/refs/heads/main.zip): descarga y descomprime para conservar todo el código.
-- [Descargas de la versión](https://github.com/piguin40-eng/segment-iq-public/releases/tag/v0.5.25-public.1): código, verificaciones y paquetes disponibles.
-- [Guía para Mac](docs/MAC.md): diferencia entre descargar el proyecto y usar el cliente de escritorio.
+- [Instalador local Mac](https://github.com/piguin40-eng/segment-iq-public/releases/tag/v0.6.0-mac-local.1): proyecto completo con instalación de sus componentes en Apple Silicon.
+- [Guía para Mac](docs/MAC.md): instalación, cuenta propia, componentes y límites comprobados.
 
-El cliente Mac se conecta al servidor del laboratorio. **El motor de segmentación local está preparado para Windows; su ejecución nativa en Mac sigue pendiente.** Descargar el código no instala Blender, B4D ni los modelos de IA. Los paquetes de escritorio son versiones de evaluación sin firma/notarización del titular.
+Abre `Instalar-SEGMENT-IQ-Mac.command` para preparar el servidor, Blender, el RAG y la voz en tu Mac, sin depender del Windows del laboratorio. Necesita macOS 14 o posterior, Apple Silicon e Internet para la instalación y el agente Codex. La cuenta de Codex es la tuya y se configura durante la instalación. B4D no está incluido: el modo local utiliza el motor propio con Blender 3.6; la integración con B4D actual requiere adaptación y validación. Los DMG anteriores siguen siendo clientes remotos. El instalador local es una versión de evaluación sin firma/notarización comercial.
 
 ## Qué contiene
 
@@ -20,6 +20,7 @@ El cliente Mac se conecta al servidor del laboratorio. **El motor de segmentaci�
 | `engine/` | Preparación automática del STL, construcción, exportación y controles geométricos |
 | `openclaw/` | Instrucciones, skills y procedimiento del laboratorio para otro agente |
 | `desktop/` | Cliente Electron para macOS Intel/Apple Silicon y Windows |
+| `macos/` | Instalación local Apple Silicon, arranque del usuario y comprobaciones nativas |
 | `docs/` | Instalación, API, correcciones, visor y límites comprobados |
 | `commercial/` | Preparación comercial y requisitos todavía pendientes; no constituye autorización de venta |
 | `tests/`, `.github/workflows/` | Pruebas y automatización de compilación |

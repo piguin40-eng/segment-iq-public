@@ -10,4 +10,6 @@ s=load();db=Store(s.data);ingest=Ingest(s,db,Rag(s,db))
 for path in sorted((s.app/'openclaw/skills').rglob('*.md')):
     source,new=ingest.register(path,name='Protocolo incluido · '+str(path.relative_to(s.app/'openclaw/skills')))
     if new or source['status']!='ready':ingest.process(source['id'])
+    checked=db.one('SELECT status,detail FROM sources WHERE id=?',(source['id'],))
+    if checked['status']!='ready':raise RuntimeError('Indexación incompleta de '+path.name+': '+checked['detail'])
 print('Skills y procedimiento indexados en el RAG de este Mac.')
