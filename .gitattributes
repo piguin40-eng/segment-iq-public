@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Engine migrations use exact SHA-256 digests; preserve these source bytes.
+engine/engine/*.py -text

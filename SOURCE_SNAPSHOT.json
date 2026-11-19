@@ -1,0 +1,7 @@
+{
+  "source_version": "0.5.25",
+  "desktop_version": "0.6.0-preview.1",
+  "files": 155,
+  "source_snapshot": "2026-11-19",
+  "scope": "Source, skills, tests, documentation and desktop client. No private corpus or vendor binaries."
+}

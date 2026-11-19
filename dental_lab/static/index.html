@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#cf2440"><title>SEGMENT IQ · Diseño y aprendizaje</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<aside>
+  <div class="brand"><span class="mark" aria-hidden="true">S<span>IQ</span></span><div>SEGMENT <em>IQ</em><small>ESTUDIO DE SEGMENTACIÓN</small></div></div>
+  <nav aria-label="Secciones"><button data-tab="consultar" class="active">01 <span>Consultar al agente</span></button><button data-tab="biblioteca">02 <span>Biblioteca de aprendizaje</span></button><button data-tab="casos">03 <span>Casos y segmentaciones</span></button><button data-tab="criterio">04 <span>Criterio del laboratorio</span></button></nav>
+  <div class="sidefoot"><span id="online" class="dot"></span> Servicio del laboratorio<br><small>Blender · RAG audiovisual · Memoria</small><button id="logout" class="quiet">Cerrar sesión</button></div>
+</aside>
+<main>
+  <header><div><span class="eyebrow">ESPACIO DEL LABORATORIO</span><h1 id="title">Consultar al agente</h1></div><div id="model" class="pill">Comprobando modelo…</div></header>
+  <div id="notice" role="status" hidden></div>
+  <section id="consultar" class="tab active">
+    <div class="intro"><h2>Lo que aprendemos, aplicado al siguiente diseño.</h2><p>Consulta vuestros procedimientos y encuentra la fuente, la captura y el minuto del vídeo.</p></div>
+    <form id="askForm"><textarea id="question" aria-label="Consulta al agente" required maxlength="6000" placeholder="¿Cómo debemos resolver la altura de la barra y la cobertura de la 37?" rows="3"></textarea><div id="questionVoice"></div><div class="formfoot"><span>Respuestas basadas en vuestra biblioteca</span><button type="button" id="searchOnly" class="secondary">Buscar fuentes</button><button id="ask" type="submit">Consultar</button></div></form>
+    <div class="quickstart"><button class="quickcard" data-go="casos"><span class="quickicon">↗</span><span><b>Empezar un caso</b><small>Sube el STL sin segmentar</small></span><span class="arrow">→</span></button><button class="quickcard" data-go="biblioteca"><span class="quickicon violet">+</span><span><b>Enseñar al agente</b><small>Añade vídeos, capturas o documentos</small></span><span class="arrow">→</span></button></div>
+    <article id="answer" hidden><div class="eyebrow">RESPUESTA DEL AGENTE</div><div id="answerText"></div></article><div id="citations" class="cards"></div>
+  </section>
+  <section id="biblioteca" class="tab">
+    <div class="split"><div class="intro"><h2>Enseñadle cómo trabajáis.</h2><p>Arrastra vídeos, capturas, documentos o código. El agente los incorpora a vuestra biblioteca para consultarlos con sus fuentes y momentos del vídeo.</p></div><div class="stat"><b id="chunkCount">0</b><span>fragmentos consultables</span></div></div>
+    <form id="uploadForm" class="panel stacked">
+      <label class="dropzone" id="learningDrop"><input id="learningFiles" type="file" multiple><span class="uploadicon" aria-hidden="true">↑</span><strong>Arrastra aquí los archivos de aprendizaje</strong><span>o pulsa para elegirlos · Puedes añadir varios a la vez</span><small>Vídeo, audio, PDF, imágenes, texto, código, STL y Blender · Hasta 8 GB por archivo</small></label>
+      <ul id="learningQueue" class="filequeue" aria-live="polite"></ul><div class="formfoot"><span id="uploadProgress">El material se guarda en el ordenador del laboratorio.</span><button id="uploadButton" disabled>Incorporar a la biblioteca</button></div>
+    </form>
+    <details class="foldertip"><summary>También podéis usar la carpeta de entrada en red</summary><p class="muted">Copiad los archivos en <code id="inbox"></code>. Se incorporan cuando termina la copia.</p></details><div id="sources" class="table"></div>
+  </section>
+  <section id="casos" class="tab">
+    <div class="intro"><h2>Un caso. Todas sus versiones.</h2><p>Sube el STL sin segmentar, revisa la propuesta y dinos qué mejorar. Cada corrección queda unida a su caso y a sus resultados.</p></div>
+    <form id="caseForm" class="panel stacked">
+      <label>Nombre del caso<input id="caseName" placeholder="Referencia interna del laboratorio" maxlength="120" required></label>
+      <label class="dropzone compact" id="caseDrop"><input id="caseFile" type="file" accept=".stl"><span class="uploadicon" aria-hidden="true">↑</span><strong>Arrastra el STL sin segmentar</strong><span>o pulsa para elegir un archivo</span></label>
+      <ul id="caseQueue" class="filequeue" aria-live="polite"></ul>
+      <details id="existingSource"><summary>Elegir un STL que ya está en la biblioteca</summary><label>STL de entrada<select id="caseSource"><option value="">Selecciona un STL…</option></select></label></details>
+      <div class="formfoot"><span>Al crear el caso, SEGMENT IQ mide el STL y empieza la segmentación.</span><button id="createCase">Crear y segmentar</button></div>
+    </form><div id="cases" class="cards"></div><h2 class="smalltitle">Cola y resultados</h2><div id="jobs" class="table"></div>
+  </section>
+  <section id="criterio" class="tab">
+    <div class="intro"><h2>Cada corrección nos acerca a vuestro diseño.</h2><p>Indica qué cambiar y añade capturas o archivos de referencia. Guarda la observación o genera una nueva versión con el historial del caso.</p></div>
+    <div class="panel stacked" id="barWorkflow" hidden><h3>Vuestro protocolo de barras</h3><p id="barWorkflowStatus"></p><p>Orientación y conos → máscara y trazado → barra y cúter → seguridad y cemento → comprobación de primaria y supra. Tus correcciones posteriores tienen prioridad.</p><div class="actions"><a class="attachment" href="/api/lab-workflow/download">Descargar skill y procedimiento</a></div></div>
+    <form id="feedbackForm" class="panel stacked">
+      <div class="row"><label>Técnico<input id="author" required maxlength="80" placeholder="Tu nombre"></label><label>Caso o criterio general<select id="feedbackCase"><option value="general">Criterio general del laboratorio</option></select></label><label>Tipo de revisión<select id="feedbackStatus"><option value="correction">Corrección o indicación</option><option value="approved">Diseño aprobado</option><option value="rejected">Diseño rechazado</option></select></label></div>
+      <label>Qué debemos conservar o corregir<textarea id="feedbackText" required minlength="3" maxlength="10000" rows="4" placeholder="Ej.: aumentar la altura de la barra 0,5 mm y darle más anchura. Si marcas una zona concreta, se conservará para interpretar esa corrección."></textarea></label>
+      <div id="feedbackVoice"></div>
+      <label class="dropzone compact" id="feedbackDrop"><input id="feedbackFiles" type="file" multiple><span class="uploadicon" aria-hidden="true">+</span><strong>Añade capturas o archivos de referencia</strong><span>Arrastra aquí o pulsa para elegir · Opcional · Hasta 20 archivos</span></label>
+      <ul id="feedbackQueue" class="filequeue" aria-live="polite"></ul>
+      <div class="formfoot wrap"><span id="revisionHint">El criterio general queda disponible para futuras consultas.</span><button class="secondary" id="saveFeedback" type="submit" value="save">Guardar corrección</button></div>
+    </form>
+    <section class="redesignpanel" aria-labelledby="redesignTitle">
+      <div class="eyebrow">APLICAR LO APRENDIDO</div><h2 id="redesignTitle">Rediseñar el mismo trabajo</h2>
+      <p>Usa las correcciones guardadas del caso y el criterio general para generar otra versión en Blender. Si has escrito una corrección arriba, se guardará antes de empezar.</p>
+      <label>Trabajo que vamos a rediseñar<select id="redesignCase"><option value="">Elige un trabajo…</option></select></label>
+      <button id="redesignFeedback" type="button" disabled>Aplicar correcciones y rediseñar este trabajo</button>
+      <p id="redesignHint" class="muted" aria-live="polite">Elige un trabajo. Se conservarán sus versiones anteriores.</p>
+      <div id="redesignProgress" role="status" hidden></div>
+    </section>
+    <section id="versionSection" hidden aria-labelledby="versionTitle"><h2 class="smalltitle" id="versionTitle">Versiones de este trabajo</h2><p class="muted">Compara las propuestas y revisa los ajustes aplicados y las indicaciones pendientes en cada informe.</p><div id="versionList" class="versiongrid"></div></section>
+    <div class="historyheading"><h2 class="smalltitle" id="historyTitle">Historial del laboratorio</h2><button class="quiet" id="allFeedback" hidden>Ver todos los casos</button></div><div id="feedbackList" class="cards"></div>
+  </section>
+</main>
+<dialog id="loginDialog"><div class="mark" aria-hidden="true">S<span>IQ</span></div><h2>Entrar en SEGMENT IQ</h2><p>Acceso del equipo del laboratorio</p><form id="loginForm"><label>Usuario<input type="text" id="username" name="username" autocomplete="username" maxlength="80" required></label><label>Contraseña<input type="password" id="password" name="password" autocomplete="current-password" maxlength="1024" required></label><button id="loginSubmit">Entrar</button><p id="loginError" role="alert"></p></form></dialog>
+<dialog id="videoDialog"><button id="closeVideo" class="secondary">Cerrar</button><video id="video" controls></video></dialog>
+<dialog id="constructionDialog" aria-labelledby="constructionTitle">
+  <div class="constructionhead"><div><span class="eyebrow">CONSTRUCCIÓN DEL TRABAJO</span><h2 id="constructionTitle">Así se está construyendo</h2></div><button id="closeConstruction" class="secondary">Cerrar visor</button></div>
+  <p id="constructionEngine" class="muted"></p>
+  <div id="constructionStatus" role="status"></div>
+  <section id="constructionAgent" class="agentactivity" hidden aria-label="Actividad del agente"><h3>Actividad del agente</h3><p id="agentSummary"></p><ol id="agentEvents"></ol></section>
+  <div class="constructionmodes" role="group" aria-label="Qué quieres ver"><button id="constructionWindow" class="secondary" aria-pressed="false">Ventana de Blender</button><button id="constructionGeometry" aria-pressed="true">Vistas por etapas</button><button id="constructionFullscreen" class="secondary">Pantalla completa</button></div>
+  <div class="constructionlayout"><div>
+    <div class="constructioncanvas"><img id="constructionFrame" alt="Geometría real de la etapa seleccionada" hidden><p id="constructionEmpty">Esperando la primera etapa…</p><span id="constructionCaption"></span></div>
+    <div class="constructioncontrols"><button id="constructionPlay" class="secondary">Reproducir</button><input id="constructionSeek" type="range" min="0" max="0" value="0" aria-label="Etapa de la construcción"><button id="constructionLive">Seguir en directo</button></div>
+    <p id="constructionHelp" class="muted">Vistas de la geometría al completar cada etapa. Puedes repetirlas como una secuencia; no es una grabación del cursor.</p>
+  </div><ol id="constructionStages" aria-label="Pasos del diseño"></ol></div>
+  <div id="constructionCorrections"></div>
+  <div class="actions"><button id="constructionCorrect">Corregir este trabajo</button><button id="constructionFiles" class="secondary">Ver archivos y diagnóstico</button></div>
+</dialog>
+<script src="/dictation.js"></script><script src="/app.js"></script>
+</body></html>

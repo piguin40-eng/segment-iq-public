@@ -1,0 +1,23 @@
+{
+  "product": "SEGMENT IQ",
+  "revision": "2026-09-11",
+  "distribution": "desktop subscription",
+  "markets_requested": ["Spain", "European Union", "Americas: country list pending"],
+  "requirements": [
+    {"id": "legal_owner", "status": "pending", "detail": "Titular, marca y estructura contractual"},
+    {"id": "intended_use_classification", "status": "pending", "detail": "Finalidad prevista y dictamen de clasificación por módulo/mercado"},
+    {"id": "market_authorizations", "status": "pending", "detail": "Trámites y autorizaciones aplicables a los países habilitados"},
+    {"id": "b4d_integration_rights", "status": "pending", "detail": "Condiciones escritas para automatización, servidor y distribución"},
+    {"id": "code_and_corpus_rights", "status": "pending", "detail": "Código, vídeos, modelos, datasets y marcas"},
+    {"id": "dependency_review", "status": "pending", "detail": "SBOM por binario/entorno, avisos y revisión de vulnerabilidades/licencias"},
+    {"id": "geometry_validation", "status": "pending", "detail": "Espesor global, conexiones, inserción, retenciones, terminaciones, validación de uso previsto"},
+    {"id": "isolated_execution", "status": "pending", "detail": "Aislamiento del código generado y parsers fuera del sandbox del agente"},
+    {"id": "privacy_contracts", "status": "pending", "detail": "Datos de salud, transferencias, roles, corpus y proveedores"},
+    {"id": "subscription_backend", "status": "pending", "detail": "Pago, identidad, licencias verificadas, plazas, cancelación y exportación"},
+    {"id": "independent_security_review", "status": "pending", "detail": "Pruebas de penetración y autorización, remedios verificados"},
+    {"id": "backup_restore", "status": "pending", "detail": "Restauración, cifrado, retención y recuperación de claves"},
+    {"id": "windows_signed_test", "status": "pending", "detail": "Firma del titular, instalación/actualización/desinstalación en Windows limpio"},
+    {"id": "macos_signed_notarized_test", "status": "pending", "detail": "Developer ID, notarización y pruebas Intel/Apple Silicon"},
+    {"id": "release_operations", "status": "pending", "detail": "Descargas HTTPS, actualizaciones, soporte, incidentes y control de cambios"}
+  ]
+}

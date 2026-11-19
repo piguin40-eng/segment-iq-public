@@ -1,0 +1,43 @@
+{
+  "name": "segment-iq-desktop",
+  "version": "0.6.0-preview.1",
+  "private": true,
+  "description": "Cliente de escritorio SEGMENT IQ — evaluación interna",
+  "main": "src/main.cjs",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.cjs",
+    "dist:win": "electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "electron-builder --mac dmg --publish never"
+  },
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.segmentiq.desktop",
+    "productName": "SEGMENT IQ Preview",
+    "directories": {"output": "dist"},
+    "files": ["src/**", "package.json", "NOTICE.txt"],
+    "asar": true,
+    "publish": null,
+    "artifactName": "SEGMENT-IQ-${version}-${os}-${arch}.${ext}",
+    "win": {"target": "nsis", "icon": "../assets/segment-iq.ico"},
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "SEGMENT IQ Preview",
+      "deleteAppDataOnUninstall": false
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "extendInfo": {"NSMicrophoneUsageDescription": "Transcribir tus indicaciones y correcciones en SEGMENT IQ."}
+    }
+  }
+}

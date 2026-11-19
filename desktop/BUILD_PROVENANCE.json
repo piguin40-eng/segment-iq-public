@@ -1,0 +1,20 @@
+{
+  "version": "0.6.0-preview.1",
+  "origin": "Previously verified successful GitHub Actions macOS build; packaged source matches desktop/src.",
+  "artifacts": [
+    {
+      "name": "SEGMENT-IQ-0.6.0-preview.1-mac-arm64.dmg",
+      "sha256": "6ec37bc82c3b1726970de6527e1aeec821fa369cc0df98391b6fd5902eefe697",
+      "bytes": 127291988,
+      "signature": "not notarized",
+      "desktop_source_tree": "85d5c5c4b54de492a9bbd1d2bb911c6283f4aa41"
+    },
+    {
+      "name": "SEGMENT-IQ-0.6.0-preview.1-mac-x64.dmg",
+      "sha256": "55c1d0310d36cbfb8d05329611c13f114355d6a373f55855c1d2be6706eced8c",
+      "bytes": 131538892,
+      "signature": "not notarized",
+      "desktop_source_tree": "85d5c5c4b54de492a9bbd1d2bb911c6283f4aa41"
+    }
+  ]
+}

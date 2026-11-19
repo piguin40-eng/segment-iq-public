@@ -1,0 +1,15 @@
+SEGMENT IQ Desktop Preview — evaluación interna, no lanzamiento comercial.
+
+Cliente para un servidor SEGMENT IQ del laboratorio. No incluye motor de
+segmentación, Blender, Blender for Dental, modelos, casos ni credenciales.
+El motor existente se ejecuta en el servidor Windows. El cliente macOS no
+significa que la generación local en macOS esté validada.
+
+Los componentes de terceros conservan sus licencias. Electron incluye
+LICENSE.electron.txt y LICENSES.chromium.html en la distribución.
+La licencia comercial del código propio, titular y contratos de suscripción
+deben cerrarse antes de comercializar; UNLICENSED no cambia licencias ajenas.
+No existe relación de patrocinio con Blender, Blender for Dental u OpenAI.
+
+Los instaladores preview sin firma son exclusivamente para pruebas internas.
+No se deben desactivar las protecciones del sistema para distribuirlos.

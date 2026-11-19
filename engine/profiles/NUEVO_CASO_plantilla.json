@@ -1,0 +1,19 @@
+{
+  "profile": "NUEVO_CASO_POR_MEDIR",
+  "source_sha256": null,
+  "arch": null,
+  "raw_to_work": null,
+  "trace_center_y": null,
+  "trace_samples": null,
+  "trace_quantiles": null,
+  "connection_radius_mm": null,
+  "expected_connections": null,
+  "expected_euler": null,
+  "cone_top_z": null,
+  "cone_top_overrides": {},
+  "bar_top_z": null,
+  "cement_gap_mm": null,
+  "max_overlap_mm3": null,
+  "max_connection_error_mm": null,
+  "adaptation_notes": "Completar SHA256, orientacion y mediciones; no ejecutar con los valores del ejemplo sin adaptarlos."
+}

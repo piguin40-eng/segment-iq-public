@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "segment-iq"
+version = "0.5.25"
+description = "Agente local de segmentacion Blender y conocimiento audiovisual del laboratorio"
+requires-python = ">=3.12,<3.13"
+dependencies = ["fastapi", "uvicorn", "python-multipart", "httpx", "faster-whisper", "rapidocr", "onnxruntime", "fastembed", "imageio-ffmpeg", "pillow", "pypdf"]
+
+[project.scripts]
+segment-iq = "dental_lab.cli:main"
+dental-lab = "dental_lab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["dental_lab*"]
+
+[tool.setuptools.package-data]
+dental_lab = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
