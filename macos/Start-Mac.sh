@@ -7,7 +7,6 @@ for LABEL in com.segmentiq.ollama com.segmentiq.local; do
   if ! launchctl print "gui/$(id -u)/$LABEL" >/dev/null 2>&1; then
     launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/$LABEL.plist"
   fi
-  launchctl kickstart "gui/$(id -u)/$LABEL"
 done
 "$ROOT/runtime/python/bin/python" -c 'import json,time,urllib.request
 for attempt in range(60):

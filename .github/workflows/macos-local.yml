@@ -25,11 +25,11 @@ jobs:
           "$ROOT/runtime/uv/uv" pip install --python "$ROOT/runtime/python/bin/python" -r requirements-geometry.txt
           "$ROOT/runtime/python/bin/python" -m pytest tests commercial/test_readiness.py -q
           node --test tests/dictation_ui.test.cjs desktop/test/policy.test.cjs
-      - name: Run actual Blender stages on synthetic bridge
+      - name: Build synthetic bridge with retentions and live Blender capture
         run: |
           "$SEGMENT_IQ_INSTALL_ROOT/runtime/geometry-python/bin/python" macos/smoke_geometry.py \
             --blender "$SEGMENT_IQ_INSTALL_ROOT/runtime/Blender.app/Contents/MacOS/Blender" \
-            --output "$RUNNER_TEMP/segment-iq-geometry"
+            --output "$RUNNER_TEMP/segment-iq-geometry" --retentions --live
       - name: Check local server, model inference, RAG and voice
         run: '"$SEGMENT_IQ_INSTALL_ROOT/runtime/python/bin/python" macos/smoke_services.py'
       - name: Preserve non-private diagnostics

@@ -6,6 +6,8 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--blender',required=True)
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--retentions',action='store_true')
+    parser.add_argument('--live',action='store_true')
     args=parser.parse_args()
     app=Path(__file__).resolve().parents[1]
     sys.path.insert(0,str(app/'engine'))
@@ -22,13 +24,24 @@ def main():
     mesh=trimesh.Trimesh(data.vert_properties[:,:3],data.tri_verts,process=True)
     source=folder/'synthetic-bridge.stl';mesh.export(source)
     profile,report=prepare(source,'24-25-26 synthetic bridge',{})
+    if args.retentions:profile['retention_mode']='dual_required'
     profile_path=folder/'profile.json'
     profile_path.write_text(json.dumps(profile,indent=2),encoding='utf-8')
     (folder/'preparation.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
-    subprocess.run([sys.executable,str(app/'engine/ejecutar.py'),'--input',str(source),
-      '--profile',str(profile_path),'--run-dir',str(folder/'run'),'--blender',args.blender],check=True)
+    command=[sys.executable,str(app/'engine/ejecutar.py'),'--input',str(source),
+      '--profile',str(profile_path),'--run-dir',str(folder/'run'),'--blender',args.blender]
+    if args.live:command.append('--live-blender')
+    subprocess.run(command,check=True)
     state=json.loads((folder/'run/Ejecucion.json').read_text())
     assert state['status']=='GEOMETRY_PASS_DESIGN_REVIEW_PENDING',state['status']
+    if args.retentions:
+        stages=json.loads((folder/'run/outputs/Proceso/progreso.json').read_text())['stages']
+        assert all(stages[i-1]['status']=='done' for i in (7,8,9))
+    if args.live:
+        capture=folder/'run/outputs/Proceso/Blender/ventana.json'
+        frames=json.loads(capture.read_text())['frames']
+        assert frames and all((folder/'run/outputs'/f['path']).is_file() for f in frames)
+        assert {3,5,12}.issubset({f['step'] for f in frames})
     print('SYNTHETIC_NATIVE_GEOMETRY_PASS — design review remains pending')
 
 if __name__=='__main__':main()

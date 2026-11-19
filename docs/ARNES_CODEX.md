@@ -20,7 +20,7 @@ Desde 0.5.2, Resultados muestra una sola propuesta: la publicada o, si no existe
 
 ## Configuración e identidad
 
-El ejecutable se detecta en PATH o en la instalación de Codex del escritorio. Se puede fijar `codex_executable` en `config.local.json`. La autenticación usa la sesión Codex del usuario de Windows que ejecuta el servicio; no se copian tokens ni se incorporan al expediente. Comprobar con `codex login status` desde ese usuario. `agent_timeout_seconds` limita cada fase de razonamiento (900 s por defecto); `agent_max_attempts` tiene un máximo de tres.
+El ejecutable se detecta en PATH, en la instalación de Codex del escritorio o en el runtime local de SEGMENT IQ para Mac. Se puede fijar `codex_executable` en `config.local.json`. La autenticación usa la sesión Codex del usuario que ejecuta el servicio en ese ordenador; no se copian tokens ni se incorporan al expediente. El instalador Mac configura su binario arm64 e inicia sesión con la cuenta del usuario. Comprobar con `codex login status` desde ese usuario. `agent_timeout_seconds` limita cada fase de razonamiento (900 s por defecto); `agent_max_attempts` tiene un máximo de tres.
 
 En Windows se utiliza el sandbox `elevated` ya configurado en el equipo. PLAN usa workspace-write y REVISIÓN read-only, con aprobación interactiva desactivada. No se usa full-access. `--ignore-user-config` evita cargar conexiones y ajustes ajenos al agente; por ello se selecciona expresamente el sandbox nativo. Si la instalación o autenticación falla, se muestra el error y no se oculta usando otro motor.
 
